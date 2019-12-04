@@ -1,0 +1,105 @@
+﻿@model Team
+@{
+    /**/
+
+    ViewBag.Title = "AddTeam";
+}
+
+
+<section class="AddTeamSec">
+    <div class="container pt-3 pb-3">
+        <div>
+            <h3 class=" text-center mt-2 text-uppercase">Add Teams</h3>
+            
+        </div>
+        <div class="col-10 offset-2 mt-5">
+            @using (Html.BeginForm("AddTeam", "Team", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                
+            <div class="row">
+                <div class="form-group col-12 mt-2">
+                    @Html.LabelFor(a => a.teamName, "Team Name", htmlAttributes: new { @class = "control-label labelStyle" })
+                    @Html.EditorFor(a => a.teamName, null, new { htmlattributes = new { @class = "form-control col-12", placeholder = "Enter Team Name", id = "teamName" } })
+                    <i class="fa fa-check text-muted ml-3" id="Nfa" hidden></i>
+                    @Html.ValidationMessageFor(a => a.teamName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-12 mt-2">
+                    @Html.LabelFor(a => a.teamLogo, "Logo Of Team", htmlAttributes: new { @class = "control-label col-12 labelStyle" })
+                    <div class="custom-file col-12">
+                        @Html.TextBoxFor(a => a.teamLogo, new { type = "file", @class = "custom-file-input custom-control ", id = "teamLogo", name = "teamLogo" })
+                        <i class="fa fa-check text-muted" id="Lfa" hidden></i>
+                        <label class="custom-file-label" for="teamLogo" id="lblPath">Choose file</label>
+                        @Html.ValidationMessageFor(a => a.teamLogo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-12 mt-2">
+                    <button type="submit" class="btn loginbtn px-5 mt-2 ml-2">Add</button>
+                </div>
+                <div>
+                    @Html.ActionLink("Return To Teams", "Index", null, new { @class = " linkFor ml-4" })
+                    @ViewBag.sameTeam
+                </div>
+            </div>
+                
+            }
+           
+        </div>
+       
+    </div>
+
+</section>
+
+@*<section class="container">
+    <h2 class="text-center mt-5 ">Add New Team</h2>
+    @using (Html.BeginForm("AddTeam", "Team", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container ">
+            <div class="row">
+                <div class="form-group col-12">
+                    @Html.LabelFor(a => a.teamName, "Team Name", htmlAttributes: new { @class = "control-label " })
+                    @Html.EditorFor(a => a.teamName, null, new { htmlattributes = new { @class = "form-control col-6", placeholder = "Enter Team Name", id = "teamName" } })
+                    <i class="fa fa-check text-muted ml-3" id="Nfa" hidden></i>
+                    @Html.ValidationMessageFor(a => a.teamName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-12">
+                    @Html.LabelFor(a => a.teamLogo, "Logo Of Team", htmlAttributes: new { @class = "control-label col-12" })
+                    <div class="custom-file col-6">
+                        @Html.TextBoxFor(a => a.teamLogo, new { type = "file", @class = "custom-file-input custom-control ", id = "teamLogo", name = "teamLogo" })
+                        <i class="fa fa-check text-muted" id="Lfa" hidden></i>
+                        <label class="custom-file-label" for="teamLogo" id="lblPath">Choose file</label>
+                        @Html.ValidationMessageFor(a => a.teamLogo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-12">
+                    <button type="submit" class="btn btn-primary px-5">Add</button>
+                    @ViewBag.sameTeam
+                </div>
+            </div>
+        </div>
+    }
+@Html.ActionLink("Return To Teams", "Index")
+</section>*@
+            
+ً@section scripts{
+    <script>
+        $("#teamName").keyup(function () {
+            if ($("#teamName").valid())
+                $("#Nfa").removeAttr("hidden")
+            else
+                $("#Nfa").attr("hidden","hidden")
+        })
+        $("#teamLogo").change(function () {
+            if ($("#teamLogo").valid())
+            {
+                $("#Lfa").removeAttr("hidden")
+                $("#lblPath").text($(this).val())
+            }
+            else
+                $("#Lfa").attr("hidden", "hidden")
+        })
+    </script>
+    }

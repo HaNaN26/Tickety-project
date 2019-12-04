@@ -1,0 +1,91 @@
+﻿@model Team
+@{
+    /**/
+
+    ViewBag.Title = "Edit Team Name";
+}
+
+@*<section class="container">
+    <h2 class="text-center mt-5 ">Edit Team Name</h2>
+    @using (Html.BeginForm("EditTeam", "Team", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container ">
+            <div class="row">
+                @Html.HiddenFor(model => model.teamID)
+                <div class="form-group col-12">
+                    @Html.LabelFor(a => a.teamName, "Team Name", htmlAttributes: new { @class = "control-label " })
+                    @Html.EditorFor(a => a.teamName, null, new { htmlattributes = new { @class = "form-control col-6", placeholder = "Enter Team Name", id = "teamName" } })
+                    <i class="fa fa-check text-muted ml-3" id="Nfa" hidden></i>
+                    @Html.ValidationMessageFor(a => a.teamName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-12">
+                    <button type="submit" class="btn btn-primary px-5">Add</button>
+                    @ViewBag.sameTeam
+                </div>
+            </div>
+        </div>
+    }
+    @Html.ActionLink("Return To Teams", "Index")
+</section>*@
+
+
+<section class="AddTeamSec pt-3 pb-3">
+    <div class="container">
+        <div>
+            <h3 class=" text-center text-uppercase mt-4">Edit Team Name</h3>
+
+        </div>
+        <div class="col-8 offset-2 mt-3">
+            @using (Html.BeginForm("EditTeam","Team"))
+            {
+                @Html.AntiForgeryToken()
+
+            <div class="row">
+                @Html.HiddenFor(model => model.teamID)
+                <div class="form-group col-12 mt-2">
+                    @Html.LabelFor(a => a.teamName, "Team Name", htmlAttributes: new { @class = "control-label labelStyle" })
+                    @Html.EditorFor(a => a.teamName, null, new { htmlattributes = new { @class = "form-control col-12", placeholder = "Enter Team Name", id = "teamName" } })
+                    <i class="fa fa-check text-muted ml-3" id="Nfa" hidden></i>
+                    @Html.ValidationMessageFor(a => a.teamName, "", new { @class = "text-danger" })
+                </div>
+
+                @*<div class="form-group col-12 mt-2">
+            @Html.LabelFor(a => a.teamLogo, "Logo Of Team", htmlAttributes: new { @class = "control-label col-12 lead font-weight-bold" })
+            <div class="custom-file col-12">
+                @Html.TextBoxFor(a => a.teamLogo, new { type = "file", @class = "custom-file-input custom-control ", id = "teamLogo", name = "teamLogo" })
+                <i class="fa fa-check text-muted" id="Lfa" hidden></i>
+                <label class="custom-file-label" for="teamLogo" id="lblPath">Choose file</label>
+                @Html.ValidationMessageFor(a => a.teamLogo, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                <div class="form-group col-12 mt-2">
+                    <button type="submit" class="btn loginbtn px-5 ml-2 mt-1">Edit</button>
+                </div>
+                @Html.ActionLink("Return To Teams", "Index", null, new { @class = " linkFor ml-4 mt-1" })
+                @ViewBag.sameTeam
+
+
+            </div>
+
+            }
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+ً@section scripts{
+    <script>
+        
+        $("#teamName").keyup(function () {
+            if ($("#teamName").valid())
+                $("#Nfa").removeAttr("hidden")
+            else
+                $("#Nfa").attr("hidden","hidden")
+        })
+    </script>
+}

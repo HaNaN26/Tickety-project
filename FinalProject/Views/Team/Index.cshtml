@@ -1,0 +1,66 @@
+﻿@model List<Team>
+@{
+    ViewBag.Title = "Teams";
+}
+<section class="TeamSec">
+    <div class="container ">
+
+        <div class="text-center">
+            <h3 class="text-center">Team</h3>
+        </div>
+
+        @if (User.IsInRole("MasterAdmin") || User.IsInRole("Admin"))
+        {
+            <div class="teambtns">
+                @Html.ActionLink("Add Team", "AddTeam", null, new { @class = "btn teamBtn my-3 px-4" })
+                @Html.ActionLink("Deleted  Teams", "UnVisibleTeam", null, new { @class = "btn btn-danger m-3 " })
+            </div>
+        }
+        <div class="row PageTeam ">
+            <table id="Team_table" class="table table-responsive table-hover small">
+                <thead>
+                    <tr>
+                        <th class="w-50 pr-5 ">Team Name</th>
+                        <th class="w-50 pr-5 ">Team Logo</th>
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("MasterAdmin"))
+                        {
+                            <th class="w-25">Active</th>
+                            <th class="w-25"></th>
+                            <th class="w-25">Actions</th>
+                            <th class="w-25"></th>
+
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td class="w-50  pr-5 ">@Html.DisplayFor(a => item.teamName)</td>
+                            <td class="w-50 pr-5 "><img src="~/img/@item.teamLogo" style="height:4rem; width:7rem;" /></td>
+                            @if (User.IsInRole("MasterAdmin") || User.IsInRole("Admin"))
+                            {
+                                <td class="w-25"><i class="fa fa-check text-muted"></i></td>
+                                <td class="w-25">@Html.ActionLink("Delete", "DeleteTeam", new { id = item.teamID }, new { @class = "btn btn-danger m-1 px-3" })</td>
+                                <td class="w-25">@Html.ActionLink("EditName", "EditTeamName", new { id = item.teamID }, new { @class = "btn teamBtn m-1 px-2" }) </td>
+                                <td>  @Html.ActionLink("EditLogo", "EditTeamLogo", new { id = item.teamID }, new { @class = "btn teamBtn m-1 px-2" })</td>
+                            }
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script src="~/Scripts/dataTable.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap4.js"></script>
+    <script>
+        $('#Team_table').DataTable();
+
+        $('.dataTables_length').addClass('bs-select');
+    </script>
+}

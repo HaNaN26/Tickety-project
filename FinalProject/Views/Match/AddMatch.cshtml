@@ -1,0 +1,152 @@
+﻿@model Match
+@{
+    ViewBag.Title = "AddMatch";
+}
+
+
+
+<section class="AddMatch ">
+    <div class="container">
+        <div>
+            <h3 class=" text-center">Add Match</h3>
+
+        </div>
+        <div class="col-12 offset-2 mt-5">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group col-12 mt-2">
+                    <div class="col-4">
+                        @Html.LabelFor(a => a.HomeTeamId, "Home Team", htmlAttributes: new { @class = "control-label labelStyle" })
+                    </div>
+                    <div class="col-8">
+                        @Html.DropDownList("HomeTeamId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.HomeTeamId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-12 mt-2">
+                    <div class="col-4">
+                        @Html.LabelFor(a => a.GuestTeamId, "Guest Team", htmlAttributes: new { @class = "control-label labelStyle" })
+                    </div>
+                    <div class="col-8">
+                        @Html.DropDownList("GuestTeamId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.GuestTeamId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-12 mt-2">
+                    <div class="col-4">
+                        @Html.LabelFor(a => a.staduimID, "Staduim Name", htmlAttributes: new { @class = "control-label labelStyle" })
+                    </div>
+                    <div class="col-8">
+                        @Html.DropDownList("staduimID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.staduimID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-12 mt-2">
+                    <div class="col-4">
+                        @Html.LabelFor(a => a.matchDate, "Match Date", htmlAttributes: new { @class = "control-label labelStyle", id = "date" })
+                    </div>
+                    <div class="col-8">
+                        <input type="date" name="matchDate" class="form-control" />
+                        @Html.ValidationMessageFor(a => a.matchDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-12 mt-2">
+                    <div class="col-4">
+                        @Html.LabelFor(a => a.matchTime, "Match Time", htmlAttributes: new { @class = "control-label labelStyle", id = "time" })
+                    </div>
+                    <div class="col-8">
+                        <input type="time" name="matchTime" class="form-control" />
+                        @Html.ValidationMessageFor(a => a.matchTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-12 mt-2">
+
+                    <button type="button" class="btn btnmatch px-5 ml-3" id="btn">Add</button>
+                    @Html.ActionLink("Return To Matches", "Index", null, new { @class = " linkFor ml-4" })
+
+
+                    @ViewBag.msg
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          
+
+                            <div class="modal-body text-center">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h3 class="modal-title mb-4 mt-3  text-center " id="exampleModalLabel">Add Degrees</h3>
+                                <span class="badge badge-info w-25  text-center">Class A</span>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="labelStyle" for="PriceA">Price</label>
+                                        <input type="number" name="PriceA" class="form-control" id="PriceA" placeholder="Price" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="labelStyle" for="NoA">Number Of Seat</label>
+                                        <input type="number" name="NoA" class="form-control" id="NoA" placeholder="Number Of Seat" required>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="badge badge-info w-25  text-center">Class B</div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="labelStyle" for="PriceB">Price</label>
+                                        <input type="number" name="PriceB" class="form-control" id="PriceB" placeholder="Price" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="labelStyle" for="NoB">Number Of Seat</label>
+                                        <input type="number" name="NoB" class="form-control" id="NoB" placeholder="Number Of Seat" required>
+                                    </div>
+                                </div>
+                                <hr />
+                                <span class="badge badge-info w-25  text-center">Class C</span>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="labelStyle" for="PriceC">Price</label>
+                                        <input type="number" name="PriceC" class="form-control" id="PriceC" placeholder="Price" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="labelStyle" for="NoC">Number Of Seat</label>
+                                        <input type="number" name="NoC" class="form-control" id="NoC" placeholder="Number Of Seat" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btnmatch fa-pull-right ">Save </button>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+
+    </div>
+       
+</section>
+
+
+
+
+
+
+
+@section scripts
+    {
+    <script>
+        $("#btn").click(function () {
+        $('#exampleModal').modal({ backdrop: 'static', keyboard: false })
+      
+        })
+    </script>
+    }

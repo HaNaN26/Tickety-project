@@ -1,0 +1,69 @@
+﻿@model List<Match>
+@{
+    ViewBag.Title = "Matches";
+}
+
+
+
+<section class="MatchTableSec">
+    <div class="container">
+
+        <h3 class=" text-center text-uppercase">Matches</h3>
+        <div class="matchBtns mt-5">
+            @Html.ActionLink("Add Match", "AddMatch", null, new { @class = "btn btnmatch my-2 px-4" })
+
+            @Html.ActionLink("Deleted Match", "UnVisibleMatch", null, new { @class = "btn btn-danger m-2" })
+        </div>
+        <div class="row matchPage small">
+            <table class="table table-hover table-responsive " id="MatchTable">
+                <thead>
+                    <tr>
+                        <th class="w-50">HomeTeam</th>
+                        <th class="w-50">GuestTeam</th>
+                        <th class="w-50">StaduimName</th>
+                        <th class="w-50">MatchDate</th>
+                        <th class="w-25">MatchTime</th>
+                        <th class="w-25">Active</th>
+                        <th></th>
+                        <th class="w-25">Action</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr class="match">
+                            <td class="w-50">@Html.DisplayFor(a => item.HomeTeam.teamName)</td>
+                            <td class="w-50">@Html.DisplayFor(a => item.GuestTeam.teamName)</td>
+                            <td class="w-50">@Html.DisplayFor(a => item.Staduim.staduimName)</td>
+                            <td class="w-50">@item.matchDate.Date.ToString("yyyy-MM-dd")</td>
+                            <td>@Html.DisplayFor(a => item.matchTime)</td>
+                            <td class="w-25"><i class="fa fa-check text-muted ml-3"></i></td>
+                            <td>
+                                @Html.ActionLink("Delete", "DeleteMatch", new { id = item.matchID }, new { @class = "btn btn-danger m-1 " })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditMatch", new { id = item.matchID }, new { @class = "btn btnmatch m-1 px-3 " })
+                            </td>
+                            <td >
+                                @Html.ActionLink("Details", "MatchDetails", new { id = item.matchID }, new { @class = "btn btnmatch m-1" })
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script src="~/Scripts/dataTable.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap4.js"></script>
+    <script>
+        $('#MatchTable').DataTable();
+
+        $('.dataTables_length').addClass('bs-select');
+    </script>
+}

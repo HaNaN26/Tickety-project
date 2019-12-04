@@ -1,0 +1,109 @@
+﻿@model  FinalProject.Models.ViewModels.IndexVM
+
+<div class="modal-content">
+    
+    <div class="modal-body">
+        <a href="@Url.Action("Index","Home")" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </a>
+        <div class="text-center">
+            <h4 class="modal-title w-100 font-weight-bold " id="exampleModalLabel"><i class="fas fa-user-lock"></i><span class="p-2">Sign Up</span></h4>
+            <div style="display:none;color:#808080" id="Regicon">
+                <i class="fas fa-spinner fa-pulse"></i>
+            </div>
+
+        </div>
+        @using (Ajax.BeginForm("Register", "Account", null, new AjaxOptions() { HttpMethod = "POST", LoadingElementId = "Regicon", UpdateTargetId = "Activpopup", InsertionMode = InsertionMode.Replace }, new { @class = "form-horizontal", role = "form" }))
+        {
+            @*@Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })*@
+            if (ViewBag.message != null)
+            {
+                <div class="alert alert-success">@ViewBag.message</div>
+            }
+            if (ViewBag.message != null)
+            {
+                <div class="alert alert-warning">@ViewBag.message</div>
+            }
+            <div class="container-fluid">
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        @Html.LabelFor(m => m.RegisterViewModel.Frist_Name, new { @class = "labelStyle d-inline control-label" })
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.RegisterViewModel.Frist_Name, new { @class = "form-control mt-2 ml-1", placeholder = "Enter FirstName" })
+                            </div>
+                            <div class="col-md-4">
+
+                                @Html.ValidationMessageFor(m => m.RegisterViewModel.Frist_Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-12">
+                        @Html.LabelFor(m => m.RegisterViewModel.Username, new { @class = "labelStyle d-inline control-label" })
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.RegisterViewModel.Username, new { @class = "form-control mt-2 ml-1", placeholder = "Enter UserName" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.RegisterViewModel.Username, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-12">
+                        @Html.LabelFor(m => m.RegisterViewModel.Email, new { @class = "labelStyle d-inline control-label" })
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.RegisterViewModel.Email, new { @class = "form-control d-inline mt-2 ml-1", placeholder = "Enter Email" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.RegisterViewModel.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-12">
+                        @Html.LabelFor(m => m.RegisterViewModel.Password, new { @class = "labelStyle d-inline control-label" })
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.PasswordFor(m => m.RegisterViewModel.Password, new { @class = "form-control mt-2 ml-1", placeholder = "Enter password" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.RegisterViewModel.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                     </div>
+                    <div class="form-group col-12">
+                        @Html.LabelFor(m => m.RegisterViewModel.ConfirmPassword, new { @class = "labelStyle d-inline control-label" })
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.PasswordFor(m => m.RegisterViewModel.ConfirmPassword, new { @class = "form-control mt-2 ml-1", placeholder ="confirm password" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.RegisterViewModel.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        </div>
+                    <div class="form-group col-12">
+                        @Html.LabelFor(m => m.RegisterViewModel.gender, new { @class = "labelStyle d-inline control-label" })
+                        <div class="row">
+                            <div class="col-md-8"> 
+                                @Html.EnumDropDownListFor(m => m.RegisterViewModel.gender, "Select-Gender", new { @class = "form-control mt-2 ml-1" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.RegisterViewModel.gender, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12 ">
+                        <div class="col-md-offset-2  col-md-10 justify-content-end">
+                            <input type="submit" class="btn loginbtn px-5" value="Register" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
